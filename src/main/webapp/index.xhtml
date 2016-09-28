@@ -20,7 +20,8 @@
                     #{employee.name}
                 </p:column>
 
-                <p:column headerText="Synergik birthday date" pattern="dd/MM/yyyy">
+                <p:column headerText="Synergik birthday date"
+                          pattern="dd/MM/yyyy">
                     #{employee.birthDate}
                 </p:column>
 
@@ -40,19 +41,22 @@
         <div>
             <h3>Synergik name:</h3>
             <p:inputText id="name" value="#{employee.name}">
-                <f:validator validatorId="EmployeeNameValidator"/>
+                <f:validator validatorId="UniversalValidator"/>
                 <h:message for="name" style="color:red"/>
             </p:inputText>
         </div>
         <div>
             <h3>Select birthday date</h3>
-            <p:calendar id="birthDate" value="#{employee.birthDate}" showOn="button">
-                <f:validator validatorId="BirthdayValidator"/>
+            <p:calendar id="birthDate" value="#{employee.birthDate}" showOn="button" readonlyInput="true">
+                <f:validator validatorId="UniversalValidator"/>
             </p:calendar>
             <h:message for="birthDate" style="color:red"/>
         </div>
         <div>
             <p:commandButton value="Add" action="#{employee.addRecord()}" update="employeesListId"/>
+        </div>
+        <div>
+            <h:message for="position" style="color:red"/>
         </div>
     </h:form>
 
@@ -61,15 +65,14 @@
         <p:dialog id="positionDialogId" header="Update employee position" widgetVar="positionUpdateDialog">
 
             <h3>Select employee:</h3>
-            <h:selectOneMenu value="#{employee.name}" id="employeesList">
+            <h:selectOneMenu value="#{employee.name}" id="employeesList" required="true">
                 <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
                 <f:selectItems value="#{list.names}" var="entry" itemValue="#{employee.name}"/>
             </h:selectOneMenu>
 
             <h3>Enter position:</h3>
             <p:inputText id="position" value="#{employee.position}">
-                <f:validator validatorId="EmployeeNameValidator"/>
-                <h:message for="position" style="color:red"/>
+                <f:validator validatorId="UniversalValidator"/>
             </p:inputText>
 
             <div>
