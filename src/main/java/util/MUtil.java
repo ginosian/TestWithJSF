@@ -21,7 +21,7 @@ public class MUtil {
         return data.chars().allMatch(Character::isLetter);
     }
 
-    public static boolean invalidString(String data){
+    public static boolean isValidString(String data){
         return data != null && !data.isEmpty();
     }
 }

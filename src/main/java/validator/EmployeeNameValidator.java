@@ -25,7 +25,8 @@ public class EmployeeNameValidator implements Validator{
 
     private void validationError(String message) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+//        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        FacesMessage msg = new FacesMessage(message);
         facesContext.addMessage(null, msg);
         throw new ValidatorException(msg);
     }
@@ -39,7 +40,7 @@ public class EmployeeNameValidator implements Validator{
     }
 
     private boolean dataIsEmpty(Object o){
-        return !(o instanceof String) || MUtil.invalidString((String)o);
+        return !(o instanceof String) || !MUtil.isValidString((String)o);
     }
 
     private boolean dataIsInvalid(Object o){

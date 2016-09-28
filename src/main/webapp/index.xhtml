@@ -12,7 +12,7 @@
 </h:head>
 
 <h:body>
-    <h:form>
+    <h:form id="employeesListId">
         <div>
             <p:dataTable var="employee" value="#{list.birthdays}">
 
@@ -45,7 +45,7 @@
                 <f:validator validatorId="BirthdayValidator"/>
             </p:calendar>
             <h:message for="birthDate" style="color:red" />
-            <p:commandButton ajax="false" value="Add" action="#{employee.addRecord()}"/>
+            <p:commandButton value="Add" action="#{employee.addRecord()}" update="employeesListId" process="@form"/>
         </div>
     </h:form>
 </h:body>
