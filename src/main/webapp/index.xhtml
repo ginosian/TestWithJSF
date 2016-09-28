@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      dir="ltr">
+
+<h:head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <div>
+            <p:dataTable var="employee" value="#{list.birthdays}">
+
+                <p:column headerText="Synergik name">
+                    #{employee.name}
+                </p:column>
+
+                <p:column headerText="Synergik birthday birthDate" pattern="dd/MM/yyyy">
+                    #{employee.birthDate}
+                </p:column>
+
+                <p:column headerText="Position">
+                    #{employee.position}
+                </p:column>
+
+                <p:column headerText="Update position">
+                    #{employee.position}
+                </p:column>
+
+            </p:dataTable>
+        </div>
+
+        <h2>New Synergik</h2>
+        <div>
+            <p:inputText id="name" value="#{employee.name}"/>
+            <p:calendar id="birthDate" value="#{employee.birthDate}" mode="inline" pattern="yyyy-MMM-dd"/>
+            <p:commandButton ajax="false" value="Add" action="#{employee.addRecord()}"/>
+        </div>
+    </h:form>
+</h:body>
+
+</html>
