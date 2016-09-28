@@ -1,7 +1,6 @@
 package entity;
 
 import db.DBImitation;
-import util.MUtil;
 
 import javax.faces.bean.ManagedBean;
 import java.util.Date;
@@ -28,13 +27,19 @@ public class EmployeeDataBean {
 
     public void addRecord() {
         this.id = DBImitation.getInstance().generateId();
-        //if(dataIsValid())
          DBImitation.getInstance().addRecord(this);
-//        else throw new InvalidDataException("Input data is invalid, either name is empty or birth day is invalid");
+    }
+
+    public void updatePosition(){
+        DBImitation.getInstance().updatePosition(this.name, this.position);
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,10 +66,4 @@ public class EmployeeDataBean {
         this.position = position;
     }
 
-    private boolean dataIsValid(){
-        return name != null &&
-                !name.isEmpty() &&
-                birthDate != null &&
-                birthDate.before(MUtil.getCurrentDate());
-    }
 }
