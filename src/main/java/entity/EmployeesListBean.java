@@ -15,5 +15,9 @@ public class EmployeesListBean {
         return DBImitation.getInstance().getBirthdays();
     }
 
+    public List<String> getNames() {
+        return DBImitation.getInstance().getEmployeesNames();
+    }
+
 
 }

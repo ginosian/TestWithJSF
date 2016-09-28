@@ -14,8 +14,8 @@ public class DBImitation {
     private static DBImitation instance = new DBImitation();
     private static long id;
 
-    private static List<EmployeeDataBean> employees = new LinkedList<EmployeeDataBean>();
-    private List<String> employeesNames = new LinkedList<String>();
+    private static List<EmployeeDataBean> employees = new LinkedList<>();
+    private List<String> employeesNames = new LinkedList<>();
 
     public static DBImitation getInstance() {
         if(!defaultDataIsSet){
@@ -49,4 +49,7 @@ public class DBImitation {
         return employeesNames.contains(name);
     }
 
+    public List<String> getEmployeesNames() {
+        return employeesNames;
+    }
 }
