@@ -14,30 +14,39 @@ public class DBImitation {
     private static DBImitation instance = new DBImitation();
     private static long id;
 
-    private static List<EmployeeDataBean> birthdays = new LinkedList<>();
+    private static List<EmployeeDataBean> employees = new LinkedList<EmployeeDataBean>();
+    private List<String> employeesNames = new LinkedList<String>();
 
     public static DBImitation getInstance() {
         if(!defaultDataIsSet){
-            birthdays.add(new EmployeeDataBean("DefaultName1", new Date(11111)));
-            birthdays.add(new EmployeeDataBean("DefaultName1", new Date(22222)));
+            employees.add(new EmployeeDataBean("DefaultName1", new Date(11111)));
+            employees.add(new EmployeeDataBean("DefaultName2", new Date(22222)));
             defaultDataIsSet = true;
         }
         return instance;
     }
 
     private DBImitation() {
+        employeesNames.add("DefaultName1");
+        employeesNames.add("DefaultName2");
     }
 
 
     public List<EmployeeDataBean> getBirthdays() {
-        return birthdays;
+        return employees;
     }
 
     public void addRecord(EmployeeDataBean record){
-        birthdays.add(record);
+        employeesNames.add(record.getName());
+        employees.add(record);
     }
 
     public long generateId(){
         return ++id;
     }
+
+    public boolean dataExist(String name){
+        return employeesNames.contains(name);
+    }
+
 }

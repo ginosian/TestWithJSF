@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
       dir="ltr">
 
 <h:head>
@@ -37,8 +37,14 @@
 
         <h2>New Synergik</h2>
         <div>
-            <p:inputText id="name" value="#{employee.name}"/>
-            <p:calendar id="birthDate" value="#{employee.birthDate}" mode="inline" pattern="yyyy-MMM-dd"/>
+            <p:inputText id="name" value="#{employee.name}">
+                <f:validator validatorId="EmployeeNameValidator"/>
+            </p:inputText>
+            <h:message for="name" style="color:red" />
+            <p:calendar id="birthDate" value="#{employee.birthDate}" mode="inline" pattern="yyyy-MMM-dd">
+                <f:validator validatorId="BirthdayValidator"/>
+            </p:calendar>
+            <h:message for="birthDate" style="color:red" />
             <p:commandButton ajax="false" value="Add" action="#{employee.addRecord()}"/>
         </div>
     </h:form>

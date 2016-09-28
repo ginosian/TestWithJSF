@@ -1,7 +1,6 @@
 package entity;
 
 import db.DBImitation;
-import exception.InvalidDataException;
 import util.MUtil;
 
 import javax.faces.bean.ManagedBean;
@@ -29,8 +28,9 @@ public class EmployeeDataBean {
 
     public void addRecord() {
         this.id = DBImitation.getInstance().generateId();
-        if(dataIsValid()) DBImitation.getInstance().addRecord(this);
-        else throw new InvalidDataException("Input data is invalid, either name is empty or birth day is invalid");
+        //if(dataIsValid())
+         DBImitation.getInstance().addRecord(this);
+//        else throw new InvalidDataException("Input data is invalid, either name is empty or birth day is invalid");
     }
 
     public long getId() {

@@ -12,4 +12,16 @@ public class MUtil {
         Calendar cal = Calendar.getInstance();
         return cal.getTime();
     }
+
+    public static boolean isBeforeToday(Date date){
+        return date.before(MUtil.getCurrentDate());
+    }
+
+    public static boolean isAlphabeticData(String data){
+        return data.chars().allMatch(Character::isLetter);
+    }
+
+    public static boolean invalidString(String data){
+        return data != null && !data.isEmpty();
+    }
 }
