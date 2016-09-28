@@ -3,6 +3,7 @@ package entity;
 import db.DBImitation;
 
 import javax.faces.bean.ManagedBean;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,6 +18,10 @@ public class EmployeesListBean {
 
     public List<String> getNames() {
         return DBImitation.getInstance().getEmployeesNames();
+    }
+
+    public HashMap<String, EmployeeDataBean> getNameEmployeePairs(){
+        return DBImitation.getInstance().getNameEntityPairs();
     }
 
 

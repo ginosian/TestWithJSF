@@ -70,4 +70,8 @@ public class DBImitation {
         employee.setPosition(position);
         nameEntityPairs.replace(employeeName, employee);
     }
+
+    public HashMap<String, EmployeeDataBean> getNameEntityPairs() {
+        return nameEntityPairs;
+    }
 }

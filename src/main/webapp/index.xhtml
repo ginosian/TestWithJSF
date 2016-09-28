@@ -29,7 +29,8 @@
                 </p:column>
 
                 <p:column>
-                    <p:commandButton value="Update position" onclick="PF('positionUpdateDialog').show();"/>
+                    <p:commandButton value="Update position" update="positionUpdateDialogId"
+                                     oncomplete="PF('positionUpdateDialog').show();"/>
                 </p:column>
 
             </p:dataTable>
@@ -51,18 +52,18 @@
             <h:message for="birthDate" style="color:red"/>
         </div>
         <div>
-            <p:commandButton value="Add" action="#{employee.addRecord()}" update="employeesListId" process="@form"/>
+            <p:commandButton value="Add" action="#{employee.addRecord()}" update="employeesListId"/>
         </div>
     </h:form>
 
 
     <h:form id="positionUpdateDialogId">
-        <p:dialog header="Update employee position" widgetVar="positionUpdateDialog">
+        <p:dialog id="positionDialogId" header="Update employee position" widgetVar="positionUpdateDialog">
 
             <h3>Select employee:</h3>
-            <h:selectOneMenu id="employeesList">
-                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{list.names}" />
+            <h:selectOneMenu value="#{employee.name}" id="employeesList">
+                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
+                <f:selectItems value="#{list.names}" var="entry" itemValue="#{employee.name}"/>
             </h:selectOneMenu>
 
             <h3>Enter position:</h3>
@@ -72,7 +73,8 @@
             </p:inputText>
 
             <div>
-                <p:commandButton value="Submit" action="#{employee.updatePosition()}" update="employeesListId" process="@form"/>
+                <p:commandButton value="Submit" actionListener="#{employee.updatePosition()}"
+                                 oncomplete="PF('positionUpdateDialog').hide();" update="employeesListId"/>
             </div>
         </p:dialog>
     </h:form>
