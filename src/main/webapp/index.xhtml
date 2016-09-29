@@ -14,7 +14,8 @@
 <h:body>
     <h:form id="employeesListId">
         <div>
-            <p:dataTable var="employee" value="#{list.birthdays}">
+            <p:dataTable var="employee"
+                         value="#{list.birthdays}">
 
                 <p:column headerText="Synergik name">
                     #{employee.name}
@@ -25,19 +26,15 @@
                     #{employee.birthDate}
                 </p:column>
 
-                <p:column headerText="Position" colspan="2">
+                <p:column headerText="Position"
+                          colspan="2">
                     #{employee.position}
-                </p:column>
-
-                <p:column>
-                    <p:commandButton value="Update position" update="positionUpdateDialogId"
-                                     oncomplete="PF('positionUpdateDialog').show();"/>
                 </p:column>
 
             </p:dataTable>
         </div>
 
-        <h2>New Synergik</h2>
+        <h2 style="color:coral">New Synergik</h2>
         <div>
             <h3>Synergik name:</h3>
             <p:inputText id="name" value="#{employee.name}">
@@ -47,13 +44,28 @@
         </div>
         <div>
             <h3>Select birthday date</h3>
-            <p:calendar id="birthDate" value="#{employee.birthDate}" showOn="button" readonlyInput="true">
+            <p:calendar id="birthDate"
+                        value="#{employee.birthDate}"
+                        showOn="button"
+                        readonlyInput="true">
                 <f:validator validatorId="UniversalValidator"/>
             </p:calendar>
             <h:message for="birthDate" style="color:red"/>
         </div>
         <div>
-            <p:commandButton value="Add" action="#{employee.addRecord()}" update="employeesListId"/>
+            <p:commandButton value="Add"
+                             action="#{employee.addRecord()}"
+                             update="employeesListId"/>
+        </div>
+
+    </h:form>
+
+    <h:form>
+        <h2 style="color:coral">Update position:</h2>
+        <div>
+            <p:commandButton value="Update position"
+                             update="positionUpdateDialogId"
+                             oncomplete="PF('positionUpdateDialog').show();"/>
         </div>
         <div>
             <h:message for="position" style="color:red"/>
@@ -62,13 +74,20 @@
 
 
     <h:form id="positionUpdateDialogId">
-        <p:dialog id="positionDialogId" header="Update employee position" widgetVar="positionUpdateDialog">
+        <p:dialog id="positionDialogId"
+                  header="Update employee position"
+                  widgetVar="positionUpdateDialog">
 
             <h3>Select employee:</h3>
-            <h:selectOneMenu value="#{employee.name}" id="employeesList" required="true">
-                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
-                <f:selectItems value="#{list.names}" var="entry" itemValue="#{employee.name}"/>
+            <h:selectOneMenu value="#{employee.name}"
+                             id="employeesList"
+                             required="true">
+                <f:selectItem itemLabel="Select One"
+                              noSelectionOption="true"/>
+                <f:selectItems value="#{list.names}"
+                               itemValue="#{employee.name}"/>
             </h:selectOneMenu>
+
 
             <h3>Enter position:</h3>
             <p:inputText id="position" value="#{employee.position}">
@@ -76,11 +95,15 @@
             </p:inputText>
 
             <div>
-                <p:commandButton value="Submit" actionListener="#{employee.updatePosition()}"
-                                 oncomplete="PF('positionUpdateDialog').hide();" update="employeesListId"/>
+                <p:commandButton value="Submit"
+                                 actionListener="#{employee.updatePosition(employee.name, employee.position)}"
+                                 oncomplete="PF('positionUpdateDialog').hide();"
+                                 update="employeesListId"/>
             </div>
         </p:dialog>
     </h:form>
+
+
 </h:body>
 
 </html>

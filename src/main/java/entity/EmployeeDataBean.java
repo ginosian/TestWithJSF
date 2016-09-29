@@ -30,7 +30,7 @@ public class EmployeeDataBean {
          DBImitation.getInstance().addRecord(this);
     }
 
-    public void updatePosition(){
+    public void updatePosition(String name, String position){
         DBImitation.getInstance().updatePosition(this.name, this.position);
     }
 
