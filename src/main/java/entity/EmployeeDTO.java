@@ -1,37 +1,36 @@
 package entity;
 
-import db.DBImitation;
-
-import javax.faces.bean.ManagedBean;
 import java.util.Date;
 
 /**
- * Created by marta.ginosyan on 9/27/2016.
+ * Created by marta.ginosyan on 9/29/2016.
  */
-@ManagedBean(name = "employee")
-public class EmployeeDataBean {
+public class EmployeeDTO {
 
     private long id;
     private String name;
     private Date birthDate = new Date();
     private String position;
 
-
-    public EmployeeDataBean() {
+    public EmployeeDTO() {
     }
 
-    public EmployeeDataBean(String name, Date birthDate) {
+    public EmployeeDTO(long id, String name, Date birthDate, String position) {
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
+        this.position = position;
     }
 
-    public void addRecord() {
-        this.id = DBImitation.getInstance().generateId();
-         DBImitation.getInstance().addRecord(this);
+    public EmployeeDTO(String name, Date birthDate, String position) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.position = position;
     }
 
-    public void updatePosition(String name, String position){
-        DBImitation.getInstance().updatePosition(this.name, this.position);
+    public EmployeeDTO(String name, Date birthDate) {
+        this.name = name;
+        this.birthDate = birthDate;
     }
 
     public long getId() {
@@ -65,5 +64,4 @@ public class EmployeeDataBean {
     public void setPosition(String position) {
         this.position = position;
     }
-
 }

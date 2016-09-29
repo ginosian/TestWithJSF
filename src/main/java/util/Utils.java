@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by marta.ginosyan on 9/27/2016.
  */
-public class MUtil {
+public class Utils {
 
     public static Date getCurrentDate(){
         Calendar cal = Calendar.getInstance();
@@ -14,7 +14,7 @@ public class MUtil {
     }
 
     public static boolean isBeforeToday(Date date){
-        return date.before(MUtil.getCurrentDate());
+        return date.before(Utils.getCurrentDate());
     }
 
     public static boolean isAlphabeticData(String data){

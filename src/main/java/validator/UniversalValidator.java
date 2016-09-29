@@ -1,7 +1,7 @@
 package validator;
 
 import db.DBImitation;
-import util.MUtil;
+import util.Utils;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -76,7 +76,7 @@ public class UniversalValidator implements Validator{
     }
 
     private boolean stringDataIsEmpty(Object o){
-        return !(o instanceof String) || !MUtil.isValidString((String)o);
+        return !(o instanceof String) || !Utils.isValidString((String)o);
     }
 
     private boolean employeeExist(Object o){
@@ -84,7 +84,7 @@ public class UniversalValidator implements Validator{
     }
 
     private boolean notAlphabetic(Object o){
-        return !MUtil.isAlphabeticData((String) o);
+        return !Utils.isAlphabeticData((String) o);
     }
 
     private boolean notADate(Object o){
@@ -92,7 +92,7 @@ public class UniversalValidator implements Validator{
     }
 
     private boolean isAfterToday(Object o){
-        return !MUtil.isBeforeToday((Date) o);
+        return !Utils.isBeforeToday((Date) o);
     }
     // endregion
 }

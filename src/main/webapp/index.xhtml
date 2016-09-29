@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:debbager="http://java.sun.com/jsf/composite"
       dir="ltr">
 
 <h:head>
@@ -15,7 +16,7 @@
     <h:form id="employeesListId">
         <div>
             <p:dataTable var="employee"
-                         value="#{list.birthdays}">
+                         value="#{EmployeeForm.employees}">
 
                 <p:column headerText="Synergik name">
                     #{employee.name}
@@ -33,31 +34,35 @@
 
             </p:dataTable>
         </div>
+    </h:form>
 
+    <h:form id="newEmployeeFormId">
         <h2 style="color:coral">New Synergik</h2>
+
         <div>
             <h3>Synergik name:</h3>
-            <p:inputText id="name" value="#{employee.name}">
+            <p:inputText id="name" value="#{EmployeeForm.name}">
                 <f:validator validatorId="UniversalValidator"/>
                 <h:message for="name" style="color:red"/>
             </p:inputText>
         </div>
+
         <div>
             <h3>Select birthday date</h3>
             <p:calendar id="birthDate"
-                        value="#{employee.birthDate}"
+                        value="#{EmployeeForm.birthDate}"
                         showOn="button"
-                        readonlyInput="true">
+                        readonlyInput="true" required="true" requiredMessage="">
                 <f:validator validatorId="UniversalValidator"/>
             </p:calendar>
             <h:message for="birthDate" style="color:red"/>
         </div>
+
         <div>
             <p:commandButton value="Add"
-                             action="#{employee.addRecord()}"
-                             update="employeesListId"/>
+                             action="#{EmployeeForm.addRecord()}"
+                             update="employeesListId :newEmployeeFormId"/>
         </div>
-
     </h:form>
 
     <h:form>
@@ -73,35 +78,33 @@
     </h:form>
 
 
-    <h:form id="positionUpdateDialogId">
-        <p:dialog id="positionDialogId"
-                  header="Update employee position"
-                  widgetVar="positionUpdateDialog">
-
+    <p:dialog id="positionDialogId"
+              header="Update employee position"
+              widgetVar="positionUpdateDialog"
+              closeOnEscape="true">
+        <h:form id="positionUpdateDialogId">
             <h3>Select employee:</h3>
-            <h:selectOneMenu value="#{employee.name}"
+            <h:selectOneMenu value="#{EmployeesPopupForm.name}"
                              id="employeesList"
                              required="true">
                 <f:selectItem itemLabel="Select One"
                               noSelectionOption="true"/>
-                <f:selectItems value="#{list.names}"
-                               itemValue="#{employee.name}"/>
+                <f:selectItems value="#{EmployeesPopupForm.names}"/>
             </h:selectOneMenu>
 
 
             <h3>Enter position:</h3>
-            <p:inputText id="position" value="#{employee.position}">
-                <f:validator validatorId="UniversalValidator"/>
+            <p:inputText id="position" value="#{EmployeesPopupForm.position}">
             </p:inputText>
 
             <div>
                 <p:commandButton value="Submit"
-                                 actionListener="#{employee.updatePosition(employee.name, employee.position)}"
+                                 actionListener="#{EmployeesPopupForm.updatePosition}"
                                  oncomplete="PF('positionUpdateDialog').hide();"
                                  update="employeesListId"/>
             </div>
-        </p:dialog>
-    </h:form>
+        </h:form>
+    </p:dialog>
 
 
 </h:body>
