@@ -1,15 +1,25 @@
 package entity;
 
+import util.RequiredTypes;
+
 import java.util.Date;
+
 
 /**
  * Created by marta.ginosyan on 9/29/2016.
  */
-public class EmployeeDTO {
+public class EmployeeDTO{
 
+    @RequiredTypes(id = true)
     private long id;
+
+    @RequiredTypes(name = true)
     private String name;
-    private Date birthDate = new Date();
+
+    @RequiredTypes(date = true)
+    private Date birthDate;
+
+    @RequiredTypes(position = true)
     private String position;
 
     public EmployeeDTO() {
@@ -63,5 +73,10 @@ public class EmployeeDTO {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return ("id: " + id  + "\n" + "name: " + name + "\n" + "position: " + position);
     }
 }

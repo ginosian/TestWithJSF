@@ -46,7 +46,10 @@ public class UniversalValidator implements Validator{
     // region Validation
     private boolean newEmployeeNameIsValid(Object o){
         errorMessage = null;
-        if(nullValue(o)) errorMessage = ErrorTypes.NULL_VALUE;
+        if(nullValue(o)) {
+            errorMessage = ErrorTypes.NULL_VALUE;
+            return false;
+        }
         if(stringDataIsEmpty(o)) errorMessage = ErrorTypes.EMPTY_EMPLOYEE_NAME;
         if(employeeExist(o)) errorMessage =  ErrorTypes.EMPLOYEE_NAME_EXIST;
         if(notAlphabetic(o)) errorMessage =  ErrorTypes.NOT_ALPHABETIC_EMPLOYEE_NAME;
@@ -55,14 +58,20 @@ public class UniversalValidator implements Validator{
 
     private boolean birthdayDateIsValid(Object o){
         errorMessage = null;
-        if(nullValue(o)) errorMessage = ErrorTypes.NULL_VALUE;
+        if(nullValue(o)) {
+            errorMessage = ErrorTypes.NULL_VALUE;
+            return false;
+        }
         if(notADate(o)) errorMessage = ErrorTypes.EMPTY_BIRTHDAY_DATE;
         if(isAfterToday(o)) errorMessage =  ErrorTypes.INVALID_BIRTHDAY_DATE;
         return errorMessage == null;
     }
 
     private boolean positionIsValid(Object o){
-        if(nullValue(o)) errorMessage = ErrorTypes.NULL_VALUE;
+        if(nullValue(o)) {
+            errorMessage = ErrorTypes.NULL_VALUE;
+            return false;
+        }
         if(stringDataIsEmpty(o)) errorMessage = ErrorTypes.EMPTY_POSITION;
         return errorMessage == null;
     }
@@ -92,7 +101,8 @@ public class UniversalValidator implements Validator{
     }
 
     private boolean isAfterToday(Object o){
-        return !Utils.isBeforeToday((Date) o);
+        if(!Utils.isBeforeToday((Date) o) || Utils.dayIsToday((Date) o)) return true;
+        return false;
     }
     // endregion
 }
