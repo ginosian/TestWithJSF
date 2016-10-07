@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:debbager="http://java.sun.com/jsf/composite"
+      xmlns:debbager="http://java.sun.com/jsf/composite" xmlns:ui="http://java.sun.com/jsf/facelets"
       dir="ltr">
 
 <h:head>
@@ -19,29 +19,29 @@
                          value="#{EmployeeForm.employees}">
 
                 <p:column headerText="Synergik name">
-                    #{employee.name}
+                    <h:outputText value="#{employee.name}"/>
                 </p:column>
 
                 <p:column headerText="Synergik birthday date"
                           pattern="dd/MM/yyyy">
-                    #{employee.birthDate}
+                    <h:outputText value="#{employee.birthDate}"/>
                 </p:column>
 
                 <p:column headerText="Position"
                           colspan="2">
-                    #{employee.position}
+                    <h:outputText value="#{employee.position}"/>
                 </p:column>
 
             </p:dataTable>
         </div>
     </h:form>
-
+    <ui:include src="position.xhtml"/>
     <h:form id="newEmployeeFormId">
         <h2 style="color:coral">New Synergik</h2>
 
         <div>
             <h3>Synergik name:</h3>
-            <p:inputText id="name" value="#{EmployeeForm.name}">
+            <p:inputText id="name" value="#{employeeForm.name}">
                 <f:validator validatorId="UniversalValidator"/>
                 <h:message for="name" style="color:red"/>
             </p:inputText>
@@ -50,7 +50,7 @@
         <div>
             <h3>Select birthday date</h3>
             <p:calendar id="birthDate"
-                        value="#{EmployeeForm.birthDate}"
+                        value="#{employeeForm.birthDate}"
                         showOn="button"
                         readonlyInput="true">
                 <f:validator validatorId="UniversalValidator"/>
@@ -60,53 +60,22 @@
 
         <div>
             <p:commandButton value="Add"
-                             action="#{EmployeeForm.addRecord()}"
-                             update="employeesListId :newEmployeeFormId"/>
+                             action="#{employeeForm.addRecord()}"
+                             update="employeesListId newEmployeeFormId"/>
         </div>
     </h:form>
-
     <h:form>
         <h2 style="color:coral">Update position:</h2>
+
         <div>
             <p:commandButton value="Update position"
-                             update="positionUpdateDialogId"
+                             update=":positionUpdateDialogId"
                              oncomplete="PF('positionUpdateDialog').show();"/>
         </div>
         <div>
-            <h:message for="position" style="color:red"/>
+            <h:message for=":positionUpdateDialogId:position" style="color:red"/>
         </div>
     </h:form>
-
-
-    <p:dialog id="positionDialogId"
-              header="Update employee position"
-              widgetVar="positionUpdateDialog"
-              closeOnEscape="true">
-        <h:form id="positionUpdateDialogId">
-            <h3>Select employee:</h3>
-            <h:selectOneMenu value="#{EmployeesPopupForm.name}"
-                             id="employeesList"
-                             required="true">
-                <f:selectItem itemLabel="Select One"
-                              noSelectionOption="true"/>
-                <f:selectItems value="#{EmployeesPopupForm.names}"/>
-            </h:selectOneMenu>
-
-
-            <h3>Enter position:</h3>
-            <p:inputText id="position" value="#{EmployeesPopupForm.position}">
-            </p:inputText>
-
-            <div>
-                <p:commandButton value="Submit"
-                                 actionListener="#{EmployeesPopupForm.updatePosition}"
-                                 oncomplete="PF('positionUpdateDialog').hide();"
-                                 update="employeesListId"/>
-            </div>
-        </h:form>
-    </p:dialog>
-
-
 </h:body>
 
 </html>
